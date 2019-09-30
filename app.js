@@ -2,6 +2,7 @@ require('dotenv').config()
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 3000
+//var port = 3000
 var bodyparser = require('body-parser')
 var mongoose = require('mongoose')
 var cors = require('cors')

@@ -87,16 +87,17 @@ exports.delete = (req, res) => {
 exports.login = (req, res) => {
     User.findOne({ username: req.body.username })
         //cari username, klo gk ada ke catch klo ada ke then, trus cek passwordnya sama gk.
-        .then(login => {
-            var hash = bcrypt.compareSync(req.body.password, login.password)
+        .then(dataLogin => {
+            var hash = bcrypt.compareSync(req.body.password, dataLogin.password)
             if (hash) {
                 var token = jwt.sign({
-                    username: login.username,
-                    id: login._id
+                    username: dataLogin.username,
+                    id: dataLogin._id
                     //_id merujuk ke id yg di generate otomatis oleh mongoDB
                 }, jwtPass)
                 //jwtPass adalah password random untuk crypt token jwtnya
-                resp(res, true, 'berhasil log in', { token: token, userId: user._id })
+                resp(res, true, 'berhasil log in', {token:token, userId:dataLogin._id})
+                //{ token: token, userId: user._id }
             } else {
                 resp(res, false, 'password salah')
             }
