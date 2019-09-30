@@ -5,6 +5,8 @@ var Product = require('../models/product.model')
 
 // exports.reviewCreate = async (req, res) => {
 //     try {
+//         var queryIdProduct = await Product.findById (req.query.productId)
+//         if(queryIdProduct){
 //         var review = await Review.create({
 //             text: req.body.text,
 //             user: req.userId,
@@ -13,36 +15,44 @@ var Product = require('../models/product.model')
 //         await User.findByIdAndUpdate(review.user, { $push: { reviews: review._id } })
 //         await Product.findByIdAndUpdate(review.product, { $push: { reviews: review._id } })
 //         resp(res, true, "review created", review)
+//     }else{
+//         resp(res, true, "product does not exist", err)
+//     }
 //     } catch (err) {
 //         resp(res, false, 'gagal buat review', err)
 //     }
 // }
 
 exports.reviewCreate = (req, res) => {
-    Review.create({
-        text: req.body.text,
-        author: req.userId,
-        product: req.query.productId
-    })
-        .then(review => {
-            User.findByIdAndUpdate(req.userId, { $push: { reviews: review._id } }, { useFindAndModify: false })
-                //boleh paker req.userId atau review.author
-                .then(() => {
-                    Product.findByIdAndUpdate(review.product, { $push: { reviews: review._id } }, { useFindAndModify: false })
-                        .then(() => {
-                            resp(res, true, 'review created', review)
-                        })
-                        .catch(errProduct => {
-                            resp(res, false, 'gagal review', errProduct)
-                        })
-                })
-                .catch(errUser => {
-                    resp(res, false, 'review gk masuk ke product', errUser)
-                })
+    var cekQueryProductId = Product.findById(req.query.productId)
+    if (cekQueryProductId) {
+        Review.create({
+            text: req.body.text,
+            author: req.userId,
+            product: req.query.productId
         })
-        .catch(err => {
-            resp(res, false, 'review error', err)
-        })
+            .then(review => {
+                User.findByIdAndUpdate(req.userId, { $push: { reviews: review._id } }, { useFindAndModify: false })
+                    //boleh paker req.userId atau review.author
+                    .then(() => {
+                        Product.findByIdAndUpdate(review.product, { $push: { reviews: review._id } }, { useFindAndModify: false })
+                            .then(() => {
+                                resp(res, true, 'review created', review)
+                            })
+                            .catch(errProduct => {
+                                resp(res, false, 'gagal review', errProduct)
+                            })
+                    })
+                    .catch(errUser => {
+                        resp(res, false, 'review gk masuk ke product', errUser)
+                    })
+            })
+            .catch(err => {
+                resp(res, false, 'review error', err)
+            })
+    } else {
+        resp(res, false, 'product does not exist', err)
+    }
 }
 
 

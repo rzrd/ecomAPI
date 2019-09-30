@@ -19,4 +19,12 @@ require('./app/routes/user.route')(app)
 require('./app/routes/product.route')(app)
 require('./app/routes/review.route')(app)
 
+
+//agar mengambil data dari query. liat google utk cara nulis query di kolom addres
+app.post('/querypath', (req, res) => {
+    res.send({
+        query: req.query.testquery
+    })
+})
+
 app.listen(port, ()=>{console.log('denger di '+port)})

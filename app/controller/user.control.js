@@ -97,7 +97,6 @@ exports.login = (req, res) => {
                 }, jwtPass)
                 //jwtPass adalah password random untuk crypt token jwtnya
                 resp(res, true, 'berhasil log in', {token:token, userId:dataLogin._id})
-                //{ token: token, userId: user._id }
             } else {
                 resp(res, false, 'password salah')
             }
