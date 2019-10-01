@@ -48,9 +48,9 @@ exports.show = (req, res) => {
             if (show) {
                 resp(res, true, 'nih usernya', show)
             } else {
-                resp(res, true, 'user udah kehapus', err)
+                resp(res, false, 'user udah kehapus', err)
             }
-            //if else lagi, karena klo user dihapus, kita klik get, kebacanya data null
+            //if else lagi, karena klo user dihapus, kita klik get, kebacanya data null. pake di semua show tunggal
         })
         .catch(err => {
             resp(res, false, 'user tak ditemukan', err)

@@ -45,12 +45,16 @@ exports.productShow = (req, res) => {
             path: 'author',
             select: 'username'
         })
+        .populate({
+            path: 'reviews',
+            select: 'text'
+        })
         .then(product => {
-            if(product){
-            resp(res, true, 'produk muncul', product)
-        }else{
-            resp(res, false, 'id produk salah', err)
-        }
+            if (product) {
+                resp(res, true, 'produk muncul', product)
+            } else {
+                resp(res, false, 'id produk salah', err)
+            }
         })
         .catch(err => {
             resp(res, false, 'produk gk ditemukan', err)
@@ -66,7 +70,7 @@ exports.productDelete = (req, res) => {
                     resp(res, true, 'product deleted', product)
                 })
                 .catch(errUser => {
-                    resp(res, false, 'gk bisa kehapus',errUser)
+                    resp(res, false, 'gk bisa kehapus', errUser)
                 })
         })
         .catch(err => {
@@ -75,11 +79,11 @@ exports.productDelete = (req, res) => {
 }
 
 exports.productEdit = (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, {$set: req.body}, {new:true, useFindAndModify: false })
-    .then(product => {
-        resp(res, true, 'edit product berhasil', product)
-    })
-    .catch(err => {
-        resp(res, false, 'gagal update product', err)
-    })
+    Product.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, useFindAndModify: false })
+        .then(product => {
+            resp(res, true, 'edit product berhasil', product)
+        })
+        .catch(err => {
+            resp(res, false, 'gagal update product', err)
+        })
 }
