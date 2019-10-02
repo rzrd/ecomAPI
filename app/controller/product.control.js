@@ -6,7 +6,8 @@ exports.productCreate = (req, res) => {
     Product.create({
         name: req.body.name,
         price: req.body.price,
-        author: req.userId
+        author: req.userId,
+        image: req.body.image
         //req.userId diambil dari cekToken
     })
         .then(newProduct => {
