@@ -37,7 +37,7 @@ exports.show = (req, res) => {
     User.findById(req.params.id)
         .populate({
             path: 'products',
-            select: ['name', 'price']
+            select: ['name', 'price','image']
         })
         .populate({
             path: 'reviews',
