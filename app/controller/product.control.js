@@ -48,7 +48,8 @@ exports.productShow = (req, res) => {
         })
         .populate({
             path: 'reviews',
-            select: ['text', 'author']
+            select: ['text', 'author'],
+            populate: {path: 'author', select: ['username','image']}
         })
         .then(product => {
             if (product) {
