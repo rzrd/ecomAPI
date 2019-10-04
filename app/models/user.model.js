@@ -4,7 +4,7 @@ var userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, default: '' },
-    image: { type: String, default: 'https://vignette.wikia.nocookie.net/twicenation/images/7/76/Happy_Happy_Jihyo_Profile.jpg/revision/latest?cb=20190530235431' },
+    image: { type: String, default: 'https://pbs.twimg.com/profile_images/1164752786992484354/PyFcqmzG_400x400.jpg' },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
 })
