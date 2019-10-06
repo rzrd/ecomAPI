@@ -15,11 +15,13 @@ var productSchema = new mongoose.Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        default: undefined
     },
     reviews: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review'
+        ref: 'Review',
+        default: undefined
     }],
     image: { type: String,
     default: 'https://stockx.imgix.net/Nike-Air-Max-1-97-Sean-Wotherspoon-NA-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&q=90&dpr=2&trim=color&updated_at=1538080256'}
