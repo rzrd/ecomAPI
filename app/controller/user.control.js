@@ -11,8 +11,8 @@ exports.create = (req, res) => {
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
         image: req.body.image,
-        reviews: [req.body.reviews],
-        products: [req.body.products]
+        reviews: [],
+        products: []
     })
     newUser.save()
         .then(create => {
