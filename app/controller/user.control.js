@@ -94,7 +94,7 @@ exports.login = (req, res) => {
                     username: dataLogin.username,
                     id: dataLogin._id
                     //_id merujuk ke id yg di generate otomatis oleh mongoDB
-                }, jwtPass)
+                }, jwtPass, { expiresIn: '1h' })
                 //jwtPass adalah password random untuk crypt token jwtnya
                 resp(res, true, 'berhasil log in', {token:token, userId:dataLogin._id})
             } else {
