@@ -5,7 +5,8 @@ var productSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: [4, '4 huruf minimal'],
-        maxlength: [20, 'max 20 char']
+        maxlength: [20, 'max 20 char'],
+        trim: true
     },
     price: {
         type: Number,

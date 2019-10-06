@@ -61,7 +61,7 @@ exports.edit = (req, res) => {
     if (req.body.password) {
         req.body.password = bcrypt.hashSync(req.body.password, 10)
     }
-    User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, useFindAndModify: false })
+    User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, useFindAndModify: false, runValidators: true })
         .then(update => {
             resp(res, true, 'user terupdate', update)
         })

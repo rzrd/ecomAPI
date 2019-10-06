@@ -128,7 +128,7 @@ exports.reviewDelete = (req, res) => {
 }
 
 exports.reviewEdit = (req, res) => {
-    Review.findByIdAndUpdate(req.params.id, {$set : req.body}, {new: true, useFindAndModify: false })
+    Review.findByIdAndUpdate(req.params.id, {$set : req.body}, {new: true, useFindAndModify: false, runValidators: true })
     .then(updReview => {
         resp(res, true, 'review diupdate done', updReview)
     })

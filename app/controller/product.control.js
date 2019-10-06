@@ -81,7 +81,7 @@ exports.productDelete = (req, res) => {
 }
 
 exports.productEdit = (req, res) => {
-    Product.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, useFindAndModify: false })
+    Product.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true, useFindAndModify: false, runValidators: true })
         .then(product => {
             resp(res, true, 'edit product berhasil', product)
         })
