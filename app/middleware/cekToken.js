@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
                     .then(user => {
                         if (user) {
                             req.userId = user._id
+                            req.username = user.username
                             //kita menyimpan user._id (data yg di tokenin), menjadi req.userId agar bisa dipanggil di controller
                             next()
                             //middleware wajib ada next, biar klo logic midle ware selesai, dia melanjutkan ke routes nya
